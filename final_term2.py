@@ -25,18 +25,18 @@ def create_deck():
     return deck
 
 def hand_string(hand):
-    return "  ".join([f"{i}:{r}{s}" for i, (r, s) in enumerate(hand)])
+    return "  ".join([f"{i+1}:{r}{s}" for i, (r, s) in enumerate(hand)])
 
 def pick_card_hidden(player_num, hand):
     clear()
     print(f"====== 玩家{player_num} 請看你的手牌（不要讓對方看到） ======\n")
     print(hand_string(hand))
-    choice = input(f"\n玩家{player_num}，請選擇要出的牌編號： ")
+    choice = input(f"\n玩家{player_num}，請選擇要出的牌編號（1-5）： ")
 
-    while not choice.isdigit() or not (0 <= int(choice) < len(hand)):
-        choice = input("編號錯誤，請重新輸入： ")
+    while not choice.isdigit() or not (1 <= int(choice) <= len(hand)):
+        choice = input("編號錯誤，請重新輸入（1-5）： ")
 
-    picked = hand.pop(int(choice))
+    picked = hand.pop(int(choice) - 1)
     clear()  # 出牌後立即隱藏
     return picked
 
@@ -67,9 +67,11 @@ while player1_hp > 0 and player2_hp > 0 and (player1 or player2):
     print(f"牌庫剩餘：{len(deck)}")
 
     # 玩家1選牌
+    input("\n請玩家1準備，按 Enter 查看手牌...")
     card1 = pick_card_hidden(1, player1)
 
     # 玩家2選牌
+    input("請玩家2準備，按 Enter 查看手牌...")
     card2 = pick_card_hidden(2, player2)
 
     r1, s1 = card1
