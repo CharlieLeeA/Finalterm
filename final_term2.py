@@ -56,7 +56,7 @@ player2 = [deck.pop() for _ in range(5)]
 
 round_num = 1
 
-print("===== 撲克牌對戰遊戲開始（雙人隱藏 + 抽牌版）！ =====")
+print("===== 撲克牌對戰遊戲開始（玩家vs.玩家）！ =====")
 input("按 Enter 開始...")
 
 while player1_hp > 0 and player2_hp > 0 and (player1 or player2):
