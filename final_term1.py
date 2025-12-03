@@ -1,6 +1,11 @@
+# ============================================
+# final_term1.py - 玩家 vs 電腦 對戰模式
+# 單人遊戲，玩家與電腦 AI 進行撲克牌對戰
+# ============================================
+
 import random
 
-# 撲克牌資料
+# ===== 撲克牌基本資料 =====
 suits = ["♠", "♥", "♦", "♣"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
@@ -11,11 +16,13 @@ rank_value = {
 }
 
 def create_deck():
+    """建立並洗牌一副52張撲克牌"""
     deck = [(r, s) for s in suits for r in ranks]
     random.shuffle(deck)
     return deck
 
 def hand_string(hand):
+    """將手牌轉換成顯示字串，格式：編號:點數花色"""
     return "  ".join([f"{i+1}:{r}{s}" for i, (r, s) in enumerate(hand)])
 
 def player_pick_card(hand):
@@ -71,11 +78,12 @@ def computer_pick_card(computer_hand, player_hp, computer_hp):
     return computer_hand.pop(idx)
 
 def draw_card_if_needed(hand, deck):
+    """補牌：當手牌少於5張時，從牌庫抽牌補滿"""
     while len(hand) < 5 and deck:
         hand.append(deck.pop())
 
 
-# ===== 遊戲開始 =====
+# ===== 遊戲主程式 =====
 deck = create_deck()
 
 player_hp = 25

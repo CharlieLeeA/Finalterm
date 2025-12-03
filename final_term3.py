@@ -1,15 +1,21 @@
+# ============================================
+# final_term3.py - 撲克牌對戰遊戲主程式
+# 整合版：可選擇 玩家vs電腦 或 玩家vs玩家 模式
+# ============================================
+
 import random
 import os
 import platform
 
-# 清除畫面 — 支援 Windows / Mac / Linux
+# ===== 清除畫面函數 =====
 def clear():
+    """清除終端機畫面，支援 Windows / Mac / Linux"""
     if platform.system() == "Windows":
         os.system("cls")
     else:
         os.system("clear")
 
-# 撲克牌資料
+# ===== 撲克牌基本資料 =====
 suits = ["♠", "♥", "♦", "♣"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
@@ -20,14 +26,17 @@ rank_value = {
 }
 
 def create_deck():
+    """建立並洗牌一副52張撲克牌"""
     deck = [(r, s) for s in suits for r in ranks]
     random.shuffle(deck)
     return deck
 
 def hand_string(hand):
+    """將手牌轉換成顯示字串，格式：編號:點數花色"""
     return "  ".join([f"{i+1}:{r}{s}" for i, (r, s) in enumerate(hand)])
 
 def draw_card_if_needed(hand, deck):
+    """補牌：當手牌少於5張時，從牌庫抽牌補滿"""
     while len(hand) < 5 and deck:
         hand.append(deck.pop())
 
@@ -94,6 +103,7 @@ def pick_card_hidden(player_num, hand):
 
 # ===== 玩家 vs 電腦 遊戲流程 =====
 def play_vs_computer():
+    """執行玩家對電腦的遊戲模式"""
     deck = create_deck()
     player_hp = 25
     computer_hp = 25
@@ -183,6 +193,7 @@ def play_vs_computer():
 
 # ===== 玩家 vs 玩家 遊戲流程 =====
 def play_vs_player():
+    """執行雙人對戰的遊戲模式（含隱藏手牌機制）"""
     deck = create_deck()
     player1_hp = 25
     player2_hp = 25
@@ -267,6 +278,7 @@ def play_vs_player():
 
 # ===== 主選單 =====
 def main():
+    """遊戲主選單：選擇遊戲模式"""
     while True:
         print("\n" + "=" * 50)
         print("       ♠ ♥ 撲克牌對戰遊戲 ♦ ♣")
