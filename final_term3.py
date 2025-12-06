@@ -300,7 +300,7 @@ def main():
         else:
             print("無效選項，請重新輸入！")
         
-        # 遊戲結束後詢問是否再玩
+        # 遊戲結束後詢問是否再玩一次
         if choice in ["1", "2"]:
             again = input("\n要再玩一次嗎？（y/n）： ")
             if again.lower() != "y":
